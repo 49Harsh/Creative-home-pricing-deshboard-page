@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 const Header = () => {
   const [isCompact, setIsCompact] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollY } = useScroll();
 
   const headerBackground = useTransform(
@@ -22,6 +24,8 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   return (
     <motion.header
       style={{ background: headerBackground, height: headerHeight }}
@@ -36,7 +40,7 @@ const Header = () => {
           <SupabaseLogo className="h-8" />
         </motion.div>
 
-        <nav>
+        <nav className="hidden md:block">
           <ul className="flex space-x-6">
             {['Product', 'Developers', 'Pricing', 'Docs', 'Blog'].map((item, index) => (
               <motion.li
@@ -62,12 +66,50 @@ const Header = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
+          className="hidden md:block"
         >
           <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors">
             Dashboard
           </button>
         </motion.div>
+
+        <div className="md:hidden">
+          <button onClick={toggleMenu} className="text-white">
+            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="md:hidden bg-black"
+        >
+          <nav className="container mx-auto px-4 py-4">
+            <ul className="space-y-4">
+              {['Product', 'Developers', 'Pricing', 'Docs', 'Blog'].map((item) => (
+                <li key={item}>
+                  <a
+                    href={`#${item.toLowerCase()}`}
+                    className="text-white hover:text-green-400 transition-colors block"
+                    onClick={toggleMenu}
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors w-full">
+                  Dashboard
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </motion.div>
+      )}
     </motion.header>
   );
 };
@@ -92,7 +134,7 @@ const SupabaseLogo = ({ className }) => (
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 }
       }} d="M151.397 66.7608C151.996 72.3621 157.091 81.9642 171.877 81.9642C184.764 81.9642 190.959 73.7624 190.959 65.7607C190.959 58.559 186.063 52.6577 176.373 50.6571L169.379 49.1569C166.682 48.6568 164.884 47.1565 164.884 44.7559C164.884 41.9552 167.681 39.8549 171.178 39.8549C176.772 39.8549 178.87 43.5556 179.27 46.4564L190.359 43.9558C189.76 38.6546 185.064 29.7527 171.078 29.7527C160.488 29.7527 152.696 37.0543 152.696 45.8561C152.696 52.7576 156.991 58.4591 166.482 60.5594L172.976 62.0598C176.772 62.8599 178.271 64.6605 178.271 66.8609C178.271 69.4615 176.173 71.762 171.777 71.762C165.983 71.762 163.085 68.1611 162.786 64.2602L151.397 66.7608Z" fill="white"/>
-      {/* Add other text paths here with similar motion variants */}
+      {/* Add other text paths for "upabase" here */}
     </motion.g>
     <path d="M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z" fill="url(#paint0_linear)"/>
     <path d="M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z" fill="url(#paint1_linear)" fillOpacity="0.2"/>
