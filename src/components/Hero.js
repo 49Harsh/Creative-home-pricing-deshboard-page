@@ -52,11 +52,11 @@ function Hero() {
         <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
           <pre className="text-green-400 text-sm md:text-base overflow-x-auto">
             <code>{`
-  // Example Supabase query
-  const { data, error } = await supabase
-    .from('users')
-    .select('*')
-    .eq('id', userId)
+                // Example Supabase query
+                const { data, error } = await supabase
+                    .from('users')
+                    .select('*')
+                    .eq('id', userId)
             `}</code>
           </pre>
         </div>

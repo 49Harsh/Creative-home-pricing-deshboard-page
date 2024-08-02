@@ -3,6 +3,8 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Features from './components/Features';
 import PricingSection from './components/PricingSection';
+import ScrollablePricingSection from './components/ScrollablePricingSection';
+import CreativeScrollPricingSection from './components/CreativeScrollPricingSection';
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
       <Header />
       <Hero />
       <PricingSection />
+      <CreativeScrollPricingSection />
 
     </div>
   );
