@@ -1,10 +1,9 @@
 import React from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Features from './components/Features';
 import PricingSection from './components/PricingSection';
-import ScrollablePricingSection from './components/ScrollablePricingSection';
 import CreativeScrollPricingSection from './components/CreativeScrollPricingSection';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
@@ -13,6 +12,7 @@ function App() {
       <Hero />
       <PricingSection />
       <CreativeScrollPricingSection />
+      <Dashboard />
 
     </div>
   );
